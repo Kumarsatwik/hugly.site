@@ -5,8 +5,12 @@
 // import { Suspense } from "react";
 "use client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useTRPC } from "@/trpc/client";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "sonner";
+
 
 const Page = () => {
   // const queryClient = getQueryClient();
@@ -14,8 +18,14 @@ const Page = () => {
   //   trpc.hello.queryOptions({ text: "text prefetch" })
   // );
 
+  const [value,setValue]=useState("")
+
   const trpc = useTRPC();
-  const invoke = useMutation(trpc.invoke.mutationOptions({}));
+  const invoke = useMutation(trpc.invoke.mutationOptions({
+    onSuccess:()=>{
+      toast.success("Background task started")
+    }
+  }));
 
   return (
     // <HydrationBoundary state={dehydrate(queryClient)}>
@@ -24,7 +34,8 @@ const Page = () => {
     //   </Suspense>
     // </HydrationBoundary>
     <div>
-      <Button onClick={() => invoke.mutate({ event: "text" })}>Click me</Button>
+      <Input value={value} onChange={(e)=>setValue(e.target.value)} />
+      <Button onClick={() => invoke.mutate({ event: value })}>Click me</Button>
     </div>
   );
 };
