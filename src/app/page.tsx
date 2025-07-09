@@ -33,8 +33,8 @@ const Page = () => {
     //     <Client />
     //   </Suspense>
     // </HydrationBoundary>
-    <div>
-      <Input value={value} onChange={(e)=>setValue(e.target.value)} />
+    <div className="m-4"> 
+      <Input value={value} onChange={(e)=>setValue(e.target.value)} className="mb-4 border-2 border-gray-300 rounded-md p-2 text-white" />
       <Button onClick={() => invoke.mutate({ event: value })}>Click me</Button>
     </div>
   );
