@@ -36,7 +36,7 @@ export const codeAgentFunction = inngest.createFunction(
       //   model: "gpt-4.1-mini-2025-04-14",
       // }),
       model: gemini({
-        model: "gemini-2.5-pro",
+        model: "gemini-2.5-flash",
       }),
       tools: [
         createTool({
@@ -208,6 +208,7 @@ export const codeAgentFunction = inngest.createFunction(
       if (isError) {
         return await prisma.message.create({
           data: {
+            projectId: event.data.projectId,
             content: "Something went wrong, please try again",
             role: "ASSISTANT",
             type: "ERROR",
@@ -217,6 +218,7 @@ export const codeAgentFunction = inngest.createFunction(
 
       await prisma.message.create({
         data: {
+          projectId: event.data.projectId,
           content: result.state.data.summary,
           role: "ASSISTANT",
           type: "RESULT",
