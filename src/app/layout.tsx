@@ -27,7 +27,7 @@ export default function RootLayout({
     <TRPCReactProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Toaster />
           {children}

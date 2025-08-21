@@ -29,7 +29,7 @@ const FragmentCard = ({
   return (
     <button
       className={cn(
-        "flex items-start text-start gap-2 border rounded-lg bg-muted w-fit p-3 hover:bg-secondary transition-colors",
+        "flex items-start text-start gap-2 border rounded-lg bg-primary/10 w-fit p-3 hover:bg-primary/20 transition-colors",
         isActiveFragment &&
           "bg-primary text-primary-foreground border-primary hover:bg-primary"
       )}
@@ -68,7 +68,7 @@ const AssistantMessage = ({
   return (
     <div
       className={cn(
-        "flex flex-col group px-2 pb-4",
+        "flex flex-col group px-2 pb-4 text-foreground",
         type === "ERROR" && "text-red-700 dark:text-red-500"
       )}
     >
