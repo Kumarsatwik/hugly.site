@@ -36,7 +36,7 @@ export const codeAgentFunction = inngest.createFunction(
       //   model: "gpt-4.1-mini-2025-04-14",
       // }),
       model: gemini({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.5-pro",
       }),
       tools: [
         createTool({
