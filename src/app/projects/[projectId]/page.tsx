@@ -1,5 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
+import { ProjectView } from "@/modules/projects/ui/views/project-view";
+import { getQueryClient, trpc } from "@/trpc/server";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
 
 interface Props {
   params: Promise<{
@@ -10,14 +12,25 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { projectId } = await params;
 
+  const queryClient = getQueryClient();
+
+  void queryClient.prefetchQuery(
+    trpc.messages.getMany.queryOptions({
+      projectId,
+    })
+  );
+
+  void queryClient.prefetchQuery(
+    trpc.projects.getOne.queryOptions({
+      id: projectId,
+    })
+  );
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-white">Project {projectId}</h1>
-      <div>
-        <Button>
-          <PlusIcon className="w-4 h-4" />
-        </Button>
-      </div>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProjectView projectId={projectId} />
+      </Suspense>
+    </HydrationBoundary>
   );
 }
