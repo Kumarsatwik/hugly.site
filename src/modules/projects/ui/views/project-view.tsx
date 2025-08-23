@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { CodeView } from "@/components/code-view";
+// import { CodeView } from "@/components/code-view";
 import { FileExplorer } from "@/components/file-explore";
 
 interface Props {
@@ -44,7 +44,7 @@ export const ProjectView = ({ projectId }: Props) => {
             />
           </Suspense>
         </ResizablePanel>
-        <ResizableHandle withHandle />
+        <ResizableHandle className="hover:bg-primary transition-colors" />
         <ResizablePanel
           defaultSize={65}
           minSize={50}
@@ -52,7 +52,7 @@ export const ProjectView = ({ projectId }: Props) => {
         >
           <Tabs
             className="h-full gap-y-0"
-            defaultValue="preview"
+            defaultValue={tabState}
             onValueChange={(value) => setTabState(value as "preview" | "code")}
           >
             <div className="w-full flex items-center p-2 border-b gap-x-2">

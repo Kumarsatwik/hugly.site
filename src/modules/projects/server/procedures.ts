@@ -18,18 +18,21 @@ export const projectsRouter = createTRPCRouter({
           id: input.id,
         },
       });
-      if(!existingProject){
-        throw new TRPCError({code:"NOT_FOUND",message:"Project not found"})
+      if (!existingProject) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Project not found",
+        });
       }
       return existingProject;
     }),
   getMany: baseProcedure.query(async () => {
-    const messages = await prisma.message.findMany({
+    const projects = await prisma.project.findMany({
       orderBy: {
         updatedAt: "desc",
       },
     });
-    return messages;
+    return projects;
   }),
 
   create: baseProcedure
@@ -66,11 +69,7 @@ export const projectsRouter = createTRPCRouter({
           },
         });
 
-        return {
-          success: true,
-          message: "Background task started successfully",
-          createdProject,
-        };
+        return createdProject;
       } catch (error) {
         console.error("❌ Error in message creation:", error);
         throw new Error(
