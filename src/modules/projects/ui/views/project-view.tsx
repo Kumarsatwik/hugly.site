@@ -67,7 +67,10 @@ export const ProjectView = ({ projectId }: Props) => {
                 </TabsTrigger>
               </TabsList>
               <div className="ml-auto flex items-center gap-x-2">
-                <Button asChild variant={"default"}>
+                <Button
+                  asChild
+                  className="bg-gradient-to-tr from-indigo-600  to-purple-500 p-0.5 font-semibold"
+                >
                   <Link href="/pricing">
                     <CrownIcon /> Upgrade
                   </Link>
