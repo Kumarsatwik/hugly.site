@@ -19,6 +19,8 @@ export const MessageContainer = ({
 }: Props) => {
   const trpc = useTRPC();
   const bottomRef = useRef<HTMLDivElement>(null);
+  const lastAssistantMessageIdRef = useRef<string | null>(null);
+
   const { data: messages } = useSuspenseQuery(
     trpc.messages.getMany.queryOptions(
       {
@@ -30,14 +32,15 @@ export const MessageContainer = ({
     )
   );
 
-  // useEffect(() => {
-  //   const lastMessage = messages.findLast(
-  //     (message) => message.role == "ASSISTANT" && !!message.fragments
-  //   );
-  //   if (lastMessage) {
-  //     setActiveFragment(lastMessage.fragments);
-  //   }
-  // }, [messages, setActiveFragment]);
+  useEffect(() => {
+    const lastAssistantMessage = messages.findLast(
+      (message) => message.role == "ASSISTANT"
+    );
+    if (lastAssistantMessage?.fragments && lastAssistantMessage.id !== lastAssistantMessageIdRef.current) {
+      setActiveFragment(lastAssistantMessage.fragments);
+      lastAssistantMessageIdRef.current = lastAssistantMessage.id; 
+    }
+  }, [messages, setActiveFragment]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
