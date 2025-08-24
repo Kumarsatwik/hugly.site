@@ -69,9 +69,9 @@ export const ProjectView = ({ projectId }: Props) => {
               <div className="ml-auto flex items-center gap-x-2">
                 <Button
                   asChild
-                  className="bg-gradient-to-tr from-indigo-600  to-purple-500 p-0.5 font-semibold"
+                  className="bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 hover:from-purple-600 hover:via-indigo-600 hover:to-blue-600 p-0.5 font-semibold transition-colors duration-200"
                 >
-                  <Link href="/pricing">
+                  <Link href="/pricing" className="flex items-center gap-1 px-3 py-1 rounded-md">
                     <CrownIcon /> Upgrade
                   </Link>
                 </Button>
