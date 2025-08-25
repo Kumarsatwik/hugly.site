@@ -125,8 +125,8 @@ export const ProjectForm = () => {
               className="bg-white dark:bg-sidebar"
               onClick={() => onSelect(template.prompt)}
             >
-              {template.emoji}
-              {template.title}
+              <span>{template.emoji}</span>
+              <span>{template.title}</span>
             </Button>
           ))}
         </div>
